@@ -1,6 +1,6 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        @cache
+        @lru_cache(maxsize = None )
         def climb(x):
             if x < 0:
                 return 0 
