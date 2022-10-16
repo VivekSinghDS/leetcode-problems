@@ -1,15 +1,28 @@
 class Solution:
     def minimizeArrayValue(self, nums: List[int]) -> int:
-        max_, sum_ = 0, 0
-        
-        for idx, num in enumerate(nums, start = 1):
-            sum_ += num
-            
-            average, modulo = divmod(sum_, idx)
-            if modulo:
-                average += 1
+        def valid(mid):
+            sum_ = 0 
+            for i in range(len(nums)):
+                sum_ += nums[i]
+                if sum_ > (i + 1)*mid:
+                    return False 
                 
-            max_ = max(max_, average)
+            return True
+        
+        left = 0 
+        right = max(nums)
+        
+        ans = 0 
+        
+        while left <= right:
+            mid = (left + right) // 2
+            if valid(mid):
+                ans = mid
+                right = mid - 1
+                
+            else:
+                left = mid + 1
+        return ans 
             
-        return max_
+    
         
