@@ -1,12 +1,12 @@
 class Solution:
     def checkIfPangram(self, sentence: str) -> bool:
-        mapper = {}
-        for i in range(26):
-            mapper[i] = 0
-            
-        for char in sentence:
-            mapper[ord(char) - ord('a')] += 1
+        seen = 0
         
-        # print(mapper.values())
-        return not 0 in mapper.values()
+        for char in sentence:
+            cur_bit = 0
+            cur_bit = 1 << (ord(char) - ord('a'))
+            
+            seen |= cur_bit
+            
+        return seen == (1 << 26) - 1
         
