@@ -8,7 +8,7 @@ class Solution:
                 graph[first].append(second)
                 graph[second].append(first)
         
-        print(graph)
+        # print(graph)
         def dfs(node, target, visited):
             if node == target:
                 return False 
