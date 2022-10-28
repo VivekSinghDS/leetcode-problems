@@ -6,14 +6,13 @@ class Solution(object):
         """
         seen = defaultdict(list)
         
-        for word in strs:
-            mapper = [0]*26
+        for letter in strs:
             
-            for char in word:
-                mapper[ord(char) - ord('a')] += 1
+            mapper = [0]*(26)
+            for char in letter:
+                mapper[ord(char) - ord("a")] += 1
                 
-            seen[tuple(mapper)].append(word)
+            seen[tuple(mapper)].append(letter)
             
         return seen.values()
-        
             
