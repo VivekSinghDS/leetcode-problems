@@ -35,9 +35,9 @@ class Solution:
             else:
                 dp[n] = 1
                 
-            max_val = max(dp[n], max_val)
+            # max_val = max(dp[n], max_val)
             
-        return max_val
+        return max(dp.values())
                 
             
         
