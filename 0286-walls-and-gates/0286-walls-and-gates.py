@@ -13,7 +13,7 @@ class Solution:
                 if rooms[r][c] == 0:
                     queue.append((r, c))
         
-        print(queue)
+        # print(queue)
         while queue:
             x, y = queue.popleft()
             paths = [(x + 1, y), (x - 1, y), 
