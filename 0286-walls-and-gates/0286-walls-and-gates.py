@@ -7,27 +7,25 @@ class Solution:
         queue = deque()
         m = len(rooms)
         n = len(rooms[0])
+        inf = (2 ** 31) - 1
         for r in range(m):
             for c in range(n):
                 if rooms[r][c] == 0:
                     queue.append((r, c))
         
-
+        print(queue)
         while queue:
-            
             x, y = queue.popleft()
+            paths = [(x + 1, y), (x - 1, y), 
+                    (x, y + 1), (x, y - 1)]
+            
+            for new_x, new_y in paths:
                 
-            for dx, dy in [(x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)]:
-                total_x = dx 
-                total_y = dy 
-                    
-                if (total_x < 0 or total_x >= len(rooms) 
-                    or total_y < 0 or total_y >= len(rooms[0]) 
-                    or rooms[total_x][total_y] != inf):
-                    continue 
-                        
-                rooms[total_x][total_y] = rooms[x][y] + 1
-                    
-                queue.append((total_x, total_y))
+                if (0 <= new_x < m) and (0 <= new_y < n) and rooms[new_x][new_y] == inf:
+            
+                    rooms[new_x][new_y] = 1 + rooms[x][y]
+                    queue.append((new_x, new_y))
+                
+        
                     
         
