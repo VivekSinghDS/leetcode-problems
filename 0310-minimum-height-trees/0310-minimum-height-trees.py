@@ -9,13 +9,13 @@ class Solution:
             neighbor[start].add(end)
             neighbor[end].add(start)
             
-        print(neighbor)
+        # print(neighbor)
         leaves = []
         for i in range(n):
             if len(neighbor[i]) == 1:
                 leaves.append(i)
                 
-        print(leaves)
+        # print(leaves)
         remaining_nodes = n
         
         while remaining_nodes > 2:
