@@ -2,25 +2,25 @@ class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
         graph = defaultdict(list)
         
-        for src, tar in edges:
-            graph[src].append(tar)
-            graph[tar].append(src)
-            
-        visited = set()
-        ans = 0
+        for parent, child in edges:
+            graph[parent].append(child)
+            graph[child].append(parent)
+        
         def dfs(node):
-            if node in visited:
-                return 
-            
             visited.add(node)
+            
             for neighbor in graph[node]:
-                dfs(neighbor)
-                
+                if neighbor not in visited:
+                    dfs(neighbor)
+                    
+        ans = 0
+        visited = set()
         for i in range(n):
-            # print(visited)
             if i not in visited:
-                dfs(i)
                 ans += 1
+                dfs(i)
                 
         return ans 
+            
+            
         
