@@ -10,6 +10,9 @@ class Solution:
             else:
                 sub[index] = nums[i]
                 
+            if len(sub) >= 3:
+                return True
+                
         return len(sub) >= 3
                 
         
