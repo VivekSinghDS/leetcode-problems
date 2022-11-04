@@ -3,16 +3,12 @@ class Solution:
         
         sub = [nums[0]]
         for i in range(1, len(nums)):
-            if sub[-1] < nums[i]:
+            index = bisect_left(sub, nums[i])
+            if index == len(sub):
                 sub.append(nums[i])
                 
             else:
-                j = 0
-
-                while sub[j] < nums[i]:
-                    j += 1
-                    
-                sub[j] = nums[i]
+                sub[index] = nums[i]
                 
         return len(sub) >= 3
                 
