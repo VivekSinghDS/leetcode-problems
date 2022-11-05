@@ -5,7 +5,7 @@ class Solution:
         val = counter.values()
         val = [-x for x in val]
         heapify(val)
-        res = []
+        res = set()
         # print(val)
         while k != 0:
             
@@ -14,7 +14,7 @@ class Solution:
             
             for key in counter:
                 if counter[key] == cur_max and key not in res:
-                    res.append(key)
+                    res.add(key)
                     break
                     
             k -= 1
