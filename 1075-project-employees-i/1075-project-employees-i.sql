@@ -4,4 +4,3 @@ INNER JOIN Employee e
 ON p.employee_id = e.employee_id
 GROUP BY p.project_id
 
-/*(SELECT COUNT(experience_years) from Employee)*/
