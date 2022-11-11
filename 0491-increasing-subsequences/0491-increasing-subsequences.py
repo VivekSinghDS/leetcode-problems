@@ -1,11 +1,11 @@
 class Solution:
     def findSubsequences(self, nums: List[int]) -> List[List[int]]:
-        res = []
+        res = set()
         
         
         def backtrack(index, cur_comb):
             if len(cur_comb) >= 2:
-                res.append(tuple(cur_comb[:]))
+                res.add(tuple(cur_comb[:]))
                 
             
             elif index >= len(nums):
@@ -20,11 +20,7 @@ class Solution:
                     
         backtrack(0, [])
         
-        res_set = set()
-        for r in res:
-            res_set.add(r)
-            
-        return res_set
+        return res
         
                     
                 
