@@ -5,8 +5,7 @@ class Solution:
         for node in range(len(graph)):
             if node not in colored:
                 colored[node] = 1
-        
-            # print(colored)
+
             queue = [node]
             while queue:
 
