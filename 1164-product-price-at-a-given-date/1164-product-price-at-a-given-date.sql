@@ -3,7 +3,7 @@ with cte as (
 select *, 
     dense_rank() over(partition by product_id order by change_date DESC) as "ranking"
     from Products
-    where change_date <= "2019-08-16"
+    where change_date <= "2019-08-16" 
     
 
     
