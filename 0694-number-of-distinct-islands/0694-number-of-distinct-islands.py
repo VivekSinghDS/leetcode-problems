@@ -2,51 +2,48 @@ class Solution:
     def numDistinctIslands(self, grid: List[List[int]]) -> int:
         def current_island_unique():
             for other_island in unique_island:
-                if len(other_island) != len(current_island):
+                if len(other_island) != len(all_island):
                     continue 
                     
-                for i1, i2 in zip(other_island, current_island):
-                    if i1 != i2:
-                        break 
+                for x, y in zip(other_island, all_island):
+                    if x != y:
+                        break
                         
                 else:
-                    return False 
+                    return False
+
             return True
-            
         def dfs(r, c):
-            if r < 0 or r >= m or c < 0 or c >= n or (r, c) in seen or grid[r][c] == 0:
+            if (r < 0 or r >= len(grid) or c < 0 or c >= len(grid[0]) or (r, c) in seen
+               or grid[r][c] == 0):
                 return 
             
-            grid[r][c] = 0
-            cur_row_index = r - row_origin
-            cur_col_index = c - col_origin 
-            current_island.append((cur_row_index, cur_col_index))
+            path = [(r + 1, c), (r - 1, c), 
+                   (r, c + 1), (r, c - 1)]
+            
             seen.add((r, c))
+            all_island.append((r - r_origin, c - c_origin))
             
-            
-            dfs(r + 1, c)
-            dfs(r - 1, c)
-            dfs(r, c + 1)
-            dfs(r, c - 1)
-            
-            
+            for row, col in path:
+                dfs(row, col)
+                
+                
+        
         seen = set()
         unique_island = []
-        m = len(grid)
-        n = len(grid[0])
-        for r in range(m):
-            for c in range(n):
-                if grid[r][c] == 1:
-                    current_island = []
-                    row_origin = r
-                    col_origin = c 
+        
+        for r in range(len(grid)):
+            for c in range(len(grid[0])):
+                r_origin = r
+                c_origin = c
+                all_island = []
+                
+                dfs(r, c)
+                
+                if not all_island or not current_island_unique():
+                    continue 
                     
-                    dfs(r, c)
-                    
-                    if not current_island or not current_island_unique():
-                        continue
-                        
-                    unique_island.append(current_island)
-                    
+                unique_island.append(all_island)
+                
         return len(unique_island)
         
