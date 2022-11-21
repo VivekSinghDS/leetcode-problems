@@ -1,16 +1,14 @@
 # Write your MySQL query statement below
-with cte as (
-select q1.person_id, q1.person_name, q1.turn, SUM(q2.weight) as "cumulative"
-    from Queue q1
-    INNER JOIN Queue q2 ON q1.turn >= q2.turn
-    group by q1.turn, q1.weight
-    HAVING cumulative <= 1000
-    order by q1.turn  
-    
+with cte as ( /* template for calculating cumulative sum */
+select person_name, weight, 
+    SUM(weight) OVER(order by turn) as "counting"
+    from Queue
 
 )
 
+
 select person_name from cte
-order by cumulative desc 
-LIMIT 1
+where counting <= 1000
+order by counting DESC LIMIT 1
+
  
