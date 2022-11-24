@@ -42,9 +42,8 @@ class Solution:
                         if neighbor and neighbor not in seen:
                             seen.add(neighbor)
                             queue.append(neighbor)
-                            if not neighbor.left and not neighbor.right:
-                                return neighbor.val
+                            # if not neighbor.left and not neighbor.right:
+                            #     return neighbor.val
                             
-        # return root.val
                     
         
