@@ -45,6 +45,6 @@ class Solution:
                             if not neighbor.left and not neighbor.right:
                                 return neighbor.val
                             
-        return root.val
+        # return root.val
                     
         
