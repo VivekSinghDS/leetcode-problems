@@ -1,16 +1,12 @@
 class Solution:
-    def jobScheduling(self, startTime: List[int], endTime: List[int], profit: List[int]) -> int:
-        jobs = sorted(zip(startTime, endTime, profit)) # combine all of them and sort 
+    def jobScheduling(self, s: List[int], e: List[int], p: List[int]) -> int:
         
-        # print(jobs)
+        jobs = sorted(zip(s, e, p))
         
-        n = len(startTime)
-        dp = [0]*(n + 1)
-        
-        for i in reversed(range(n)):
-            k = bisect_left(jobs, jobs[i][1], key = lambda j : j[0]) # find the place where you can start the next schedule
-            dp[i] = max(jobs[i][2] + dp[k], dp[i + 1])
+        @lru_cache(None)
+        def dfs(i):
+            if i >= len(jobs) : return 0
+            k = bisect_left(jobs, jobs[i][1], key = lambda j: j[0])
+            return max(dfs(i+1), jobs[i][2] + dfs(k))
             
-        return dp[0]
-        
-        
+        return dfs(0)
