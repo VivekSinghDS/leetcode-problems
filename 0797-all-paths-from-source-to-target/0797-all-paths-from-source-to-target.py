@@ -1,19 +1,19 @@
 class Solution:
     def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
         res = []
-        n = len(graph)
-        def dfs(cur_node, path):
+        
+        def backtrack(node, cur_comb):
             nonlocal res
-            if cur_node == n - 1:
-                res.append(path + [cur_node])
+            if node == len(graph) - 1:
+                res.append(cur_comb[:])
                 return 
             
-            
-            for neighbor in graph[cur_node]:
-                dfs(neighbor, path + [cur_node])
+            for neighbor in graph[node]:
+                backtrack(neighbor, cur_comb + [neighbor])
                 
-        dfs(0, [])
+        backtrack(0, [0])
         return res
+        
                 
             
             
