@@ -4,9 +4,8 @@ class Solution:
         
         def backtrack(cur_comb, index):
             nonlocal res
-            if index == len(s):
-                if len(cur_comb) == len(s):
-                    res.append("".join(cur_comb[:]))
+            if len(cur_comb) == len(s):
+                res.append("".join(cur_comb[:]))
                 return 
             
             for i in range(index, len(s)):
