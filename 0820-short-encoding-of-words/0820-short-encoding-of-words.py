@@ -21,19 +21,15 @@ class Trie:
             
 class Solution:
     def minimumLengthEncoding(self, words: List[str]) -> int:
-        words = list(set(words))
         t = Trie()
+        words = list(set(words))
+        total = 0 
         for word in words:
             t.insert(word[::-1])
-        
-        total = 0
+        # print(t.ends)
         for node, depth in t.ends:
-            # print(node.children)
             if len(node.children) == 0:
-                
                 total += depth
                 
         return total
-            
-        
         
