@@ -1,21 +1,21 @@
 class Solution:
     def numFactoredBinaryTrees(self, arr: List[int]) -> int:
         arr.sort()
-        ways = defaultdict(int)
-        
+        mapper = defaultdict(int)
         for a in arr:
+            
             temp = 1
-            
             for b in arr:
-                if b > a:
-                    break 
+                if b > a :
+                    break
+                if a % b == 0:
+                    temp += (mapper[b] * mapper[a / b])
                 
-                temp += (ways[b] * ways[a / b])
-                
-            ways[a] = temp
-            # ways[a] %= (10 ** 9 + 7)
+            mapper[a] = temp
             
-        return sum(ways.values()) % (10 ** 9 + 7)
+        return sum(mapper.values()) % (10**9 + 7)
+            
+            
                     
                 
                 
