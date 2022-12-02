@@ -5,7 +5,7 @@ class Solution:
         
         def backtrack(cur_comb):
             if len(cur_comb) == n:
-                res.append("".join(cur_comb[:]))
+                res.append(int("".join(cur_comb[:])))
                 return 
             
             for i in range(10):
