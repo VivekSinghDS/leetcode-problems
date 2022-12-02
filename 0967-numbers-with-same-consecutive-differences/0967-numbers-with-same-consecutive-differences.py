@@ -3,9 +3,10 @@ class Solution:
         
         res = []
         
+        @cache
         def backtrack(cur_comb):
             if len(cur_comb) == n:
-                res.append(int("".join(cur_comb[:])))
+                res.append(int(cur_comb[:]))
                 return 
             
             for i in range(10):
@@ -13,12 +14,12 @@ class Solution:
                     continue 
                     
                 elif not cur_comb:
-                    backtrack(cur_comb + [str(i)])
+                    backtrack(cur_comb + str(i))
                     
                 else:
                     if abs(int(cur_comb[-1]) - i) == k:
-                        backtrack(cur_comb + [str(i)])
+                        backtrack(cur_comb + str(i))
                     
-        backtrack([])
+        backtrack("")
         return res
                 
