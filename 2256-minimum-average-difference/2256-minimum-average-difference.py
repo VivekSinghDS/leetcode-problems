@@ -3,23 +3,22 @@ class Solution:
         sum_uptil_now = []
         running_sum = 0
         
-        for n in nums:
-            running_sum += n
-            sum_uptil_now.append(running_sum)
+        total = sum(nums)
             
         # print(sum_uptil_now)
         length = len(nums)
         res = float('inf')
         result = None
         for i in range(length):
+            running_sum += nums[i]
             # print(i + 1, length - i - 1, res)
             cur_length = i + 1
-            first = int(sum_uptil_now[i] / cur_length)
+            first = int(running_sum / cur_length)
             if i == (length) - 1:
                 second = 0
                 
             else:
-                second = int((sum_uptil_now[-1] - sum_uptil_now[i]) / (length - i - 1))
+                second = int((total - running_sum) / (length - i - 1))
             # print(first, second)
             ans = abs(first - second)
             
