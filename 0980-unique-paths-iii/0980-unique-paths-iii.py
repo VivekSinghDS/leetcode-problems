@@ -29,15 +29,15 @@ class Solution:
                     res += 1
                     
                 return 
-            
-            paths = [(r + 1, c),
-                        (r - 1, c),
-                        (r, c + 1),
-                        (r, c - 1)]
+
             
             if(0 <= r < m and 0 <= c < n and grid[r][c] != -1 and (r, c) not in seen):
                 seen.add((r, c))
-                
+                            
+                paths = [(r + 1, c),
+                        (r - 1, c),
+                        (r, c + 1),
+                        (r, c - 1)]
                 for x, y in paths:
                     dfs(x, y, seen, walk + 1)
                     
