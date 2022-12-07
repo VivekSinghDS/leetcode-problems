@@ -1,8 +1,9 @@
 class Solution:
     def numTilePossibilities(self, tiles: str) -> int:
+
         counter = Counter(tiles)
         res = 0
-        
+
         def backtrack(counter, cur_comb):
             nonlocal res
             if len(cur_comb) > 0:
