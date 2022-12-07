@@ -9,10 +9,7 @@ class Solution:
                     res = max(res, 1 + dfs(new_word))
                     
             return res
-                    
-            
-            
-        dp = {}
+
         hash_set = set()
         for word in words:
             hash_set.add(word)
