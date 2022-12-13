@@ -1,4 +1,7 @@
 # Write your MySQL query statement below
+select stock_name, sum(case when operation = 'Buy' then -price else price end) as "capital_gain_loss"
+from Stocks group by stock_name
+/*
 with cte as (
 select stock_name, operation_day, operation,
     sum(price) over(partition by stock_name, operation) as "grouped_company"
@@ -29,3 +32,4 @@ select stock_name,
 sell_price - buy_price as "capital_gain_loss"
 from cte_4
 
+*/
