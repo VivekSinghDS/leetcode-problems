@@ -1,13 +1,13 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        rob1, rob2 = 0, 0 
-        temp = 0
-        for n in nums:
-            temp = max(rob1 + n, rob2)
+        @cache
+        def dfs(n):
+            if n < 0:
+                return 0
             
-            rob1 = rob2 
-            rob2 = temp
-            
-            
-        return temp
+            res = 0 
+            res = max(dfs(n - 1), nums[n] + dfs(n - 2))
+            return res
+        
+        return dfs(len(nums) - 1)
             
