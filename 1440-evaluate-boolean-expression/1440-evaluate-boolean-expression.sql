@@ -1,21 +1,10 @@
-# Write your MySQL query statement below
-with cte as (
-select e.*, 
-    CASE 
-        when e.operator = ">" AND v1.value > v2.value then "true"
-        when e.operator = "<" AND v1.value < v2.value then "true"
-        when e.operator = "=" AND v1.value = v2.value then "true"
-    else "false"
-    END as "value"
-    
-    
-    from Expressions e 
-    LEFT JOIN Variables v1 
-    on v1.name = e.left_operand
-    LEFT JOIN Variables v2 
-    ON v2.name = e.right_operand
-    
-
+WITH CTE AS (
+    SELECT left_operand, operator, right_operand, (SELECT value FROM Variables WHERE name = left_operand) AS left_operand_value, (SELECT value FROM Variables WHERE name = right_operand) AS right_operand_value FROM Expressions
 )
-
-select * from cte
+SELECT left_operand, operator, right_operand,
+CASE
+    WHEN operator = "<" THEN IF(left_operand_value < right_operand_value,"true","false")
+    WHEN operator = ">" THEN IF(left_operand_value > right_operand_value, "true", "false")
+    ELSE IF(left_operand_value = right_operand_value, "true", "false")
+END AS value
+FROM CTE;
