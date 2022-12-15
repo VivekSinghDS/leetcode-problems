@@ -27,7 +27,20 @@ class Solution:
         for i in range(m):
             for j in range(n):
                 if grid[i][j] != 0:
-                    dfs(i, j, 0)
+                    legal_directions = 0
+
+                    if i - 1 >= 0 and grid[i - 1][j] != 0:
+                        legal_directions += 1
+                    if i + 1 < len(grid) and grid[i + 1][j] != 0:
+                        legal_directions += 1
+                    if j - 1 >= 0 and grid[i][j - 1] != 0:
+                        legal_directions += 1
+                    if j + 1 < len(grid[i]) and grid[i][j + 1] != 0:
+                        legal_directions += 1
+
+                    if legal_directions < 3:
+                        dfs(i, j, 0)
+                    
                     
         return res if res != float('-inf') else 0
                     
