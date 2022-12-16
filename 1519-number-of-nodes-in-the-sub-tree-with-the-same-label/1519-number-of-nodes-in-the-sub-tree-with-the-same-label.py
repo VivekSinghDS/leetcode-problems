@@ -20,7 +20,7 @@ class Solution:
 
             return counter
         
-        print(tree)
+        
         dfs(0)
         return res
         
