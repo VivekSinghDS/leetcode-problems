@@ -6,7 +6,7 @@ class Solution:
             for area in region[1:]:
                 graph[area] = region[0]
         
-        print(graph)
+        # print(graph)
         
         r1_copy = region1
         r2_copy = region2
