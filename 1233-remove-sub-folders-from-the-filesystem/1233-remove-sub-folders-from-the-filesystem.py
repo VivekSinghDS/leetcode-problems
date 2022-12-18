@@ -1,42 +1,45 @@
 class Node:
     def __init__(self):
         self.children = {}
-        self.isEnd = False
+        self.isEnd = False 
         
 class Trie:
     def __init__(self):
         self.root = Node()
         
     def insert(self, word):
-        node = self.root
+        cur = self.root
+        
         for char in word:
-            if char not in node.children:
-                node.children[char] = Node()
+            if char not in cur.children:
+                cur.children[char] = Node()
                 
-            node = node.children[char]
+            cur = cur.children[char]
             
-        node.isEnd = True
+        cur.isEnd = True 
         
     def find(self):
-        
-        def dfs(directory, node):
+        def dfs(node, directory):
             if node.isEnd:
                 res.append('/' + '/'.join(directory))
                 return 
             
-            for char in node.children:
-                dfs(directory + [char], node.children[char])
+            for children in node.children:
+                dfs(node.children[children], directory + [children])
                 
+            
         res = []
-        dfs([], self.root)
+        dfs(self.root, [])
         return res
 class Solution:
     def removeSubfolders(self, folder: List[str]) -> List[str]:
+        folder.sort()
+
         t = Trie()
-        
         for f in folder:
             f = f.split('/')[1:]
             t.insert(f)
             
         return t.find()
+            
         
