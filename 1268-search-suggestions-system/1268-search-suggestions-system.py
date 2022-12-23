@@ -8,45 +8,54 @@ class Trie:
         self.root = Node()
         
     def insert(self, word):
-        cur = self.root    
-        for character in word:
-            if character not in cur.children:
-                cur.children[character] = Node()
+        cur = self.root 
+        
+        for char in word:
+            if char not in cur.children:
+                cur.children[char] = Node()
                 
             if len(cur.suggestions) < 3:
                 cur.suggestions.append(word)
                 
-            cur = cur.children[character]
-        
+            cur = cur.children[char]    
+            
         if len(cur.suggestions) < 3:
             cur.suggestions.append(word)
-
-        
-    def find(self, search_text):
+            
+    def find(self, word):
+        cur = self.root 
         res = []
-        cur = self.root
-        string_input = ""
-        
-        for char in search_text:
-            if char in cur.children:
-                cur = cur.children[char]
-                res.append(cur.suggestions)
+        for char in word:
+            if char not in cur.children:
+                break 
                 
-            else:
-                break
-                
-        remaining = len(search_text) - len(res)
-        for j in range(remaining):
+            res.append(cur.children[char].suggestions)
+            cur = cur.children[char]
+         
+        remaining = 0 
+        if len(res) != len(word):
+            remaining = len(word) - len(res)
+            
+        for i in range(remaining):
             res.append([])
+            
         return res
         
-        
+
 class Solution:
     def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
-        products.sort()
         t = Trie()
+        products.sort()
         
         for product in products:
             t.insert(product)
             
+        input_string = ""
+        for char in searchWord:
+            input_string += char
+            
         return t.find(searchWord)
+            
+            
+            
+        
