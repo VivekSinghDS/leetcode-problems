@@ -3,11 +3,13 @@ class Solution:
         l = 0 
         profit = 0
         for r in range(1, len(prices)):
-            if prices[l] > prices[r]:
+            if prices[r] < prices[l]:
                 l = r
                 
-            profit = max(profit, prices[r] - prices[l])
-            
+            else:
+                profit = max(profit, prices[r] - prices[l])
+                
         return profit
+            
             
         
