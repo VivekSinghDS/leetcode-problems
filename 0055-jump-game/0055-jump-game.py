@@ -1,15 +1,12 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        if len(nums) == 1:
-            return True 
+        farthest = 0
         
-        reachable = 0 
         for i in range(len(nums)):
-            if i > reachable:
-                return False
+            if i > farthest:
+                return False 
             
-            reachable = max(reachable, i + nums[i])
+            farthest = max(farthest, i + nums[i])
             
         return True
-        
         
