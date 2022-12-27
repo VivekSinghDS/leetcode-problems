@@ -8,21 +8,24 @@ class Solution:
     def sumEvenGrandparent(self, root: TreeNode) -> int:
         queue = deque()
         
-        queue.append((root, None, None))
+        queue.append((root, None))
         res = 0
         
         while queue:
             for _ in range(len(queue)):
-                node, grandparent, parent = queue.popleft()
+                node, parent = queue.popleft()
                 
                 if node:
-                    # print(node.val, level, grandparent, parent, res)
-                     
-                    if grandparent and grandparent % 2 == 0:
-                        res += node.val 
+                    if node.left:
+                        if parent and parent % 2 == 0:
+                            res += node.left.val
                             
-                    queue.append((node.left, parent, node.val))
-                    queue.append((node.right, parent, node.val))
+                    if node.right:
+                        if parent and parent % 2 == 0:
+                            res += node.right.val
+                            
+                    queue.append((node.left, node.val))
+                    queue.append((node.right, node.val))
                     
         return res
         
