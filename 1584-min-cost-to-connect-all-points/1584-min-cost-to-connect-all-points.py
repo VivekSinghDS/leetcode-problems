@@ -1,7 +1,6 @@
 class Solution:
     def minCostConnectPoints(self, points: List[List[int]]) -> int:
         graph = {i : [] for i in range(len(points))}
-        minHeap = []
         for i in range(len(points)):
             x1, y1 = points[i]
             
