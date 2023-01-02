@@ -1,6 +1,5 @@
 class Solution:
     def distinctPrimeFactors(self, nums: List[int]) -> int:
-        res = set()
         
         def get_prime_factors(n):
             res = set()
