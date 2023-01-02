@@ -17,7 +17,7 @@ SELECT  id,
          MAX(login_date) as EndDate,
          row_num,
          Groupings, 
-         count(id),
+         
         datediff(MAX(login_date), MIN(login_date)) as duration
  FROM temp1
     group by id, Groupings
