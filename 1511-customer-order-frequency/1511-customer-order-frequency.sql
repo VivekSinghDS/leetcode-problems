@@ -29,7 +29,7 @@ select c.quantity * p.price as "expenditure",
 ), cte_4 as (
 select customer_id from cte_3
 group by customer_id 
-having count(*) = 2
+having count(1) = 2
     
 )
 select c.customer_id, name from Customers c INNER JOIN cte_4 c4 ON c4.customer_id = c.customer_id
