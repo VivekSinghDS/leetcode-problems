@@ -1,16 +1,16 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        @lru_cache(None)
-        def dfs(n):
-            if n == 0:
+        
+        @cache 
+        def dfs(current):
+            # print(current)
+            if current == 0:
                 return 1
             
-            elif n < 0:
-                return 0 
+            if current < 0:
+                return 0
             
-            total = 0
-            total = dfs(n - 1) + dfs(n - 2)
-            return total
+            return dfs(current - 1) + dfs(current - 2)
         
         return dfs(n)
         
