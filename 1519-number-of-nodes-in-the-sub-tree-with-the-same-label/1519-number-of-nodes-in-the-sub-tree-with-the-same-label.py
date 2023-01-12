@@ -1,30 +1,28 @@
 class Solution:
     def countSubTrees(self, n: int, edges: List[List[int]], labels: str) -> List[int]:
-        res = [0] * n
-        seen = set()
-        seen.add(0)
-        tree = defaultdict(list)
-        for parent, child in edges:
-            tree[parent].append(child)
-            tree[child].append(parent)
+        graph = defaultdict(list)
+        
+        for source, target in edges:
+            graph[source].append(target)
+            graph[target].append(source)
+        
+        res = [None]*n
+        def dfs(node, parent):
+            current_f = [0]*26
             
-        def dfs(node):
-            counter = Counter(labels[node])
-            for neighbor in tree[node]:
-                if neighbor in seen:
-                    continue   
-                seen.add(neighbor)
-                counter += dfs(neighbor)
-                
-            res[node] = counter.get(labels[node])
-
-            return counter
+            for neighbor in graph[node]:
+                if neighbor != parent:
+                    f = dfs(neighbor, node)
+                    
+                    for i in range(26):
+                        current_f[i] += f[i]
+                        
+            current_f[ ord(labels[node]) - ord('a') ] += 1
+            res[node] = current_f[ ord(labels[node]) - ord('a') ]
+            return current_f
         
-        
-        dfs(0)
+        dfs(0, -1)
         return res
-        
-        
-                
+                    
                 
         
