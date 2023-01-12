@@ -6,10 +6,9 @@ class Solution:
             cur += n
             res = max(res, cur)
             if cur < 0:
-                cur = 0
+                cur = 0 
                 
             
             
         return res 
             
-        
