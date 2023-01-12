@@ -7,6 +7,8 @@ class Solution:
             graph[target].append(source)
         
         res = [None]*n
+        
+        @cache
         def dfs(node, parent):
             current_f = [0]*26
             
