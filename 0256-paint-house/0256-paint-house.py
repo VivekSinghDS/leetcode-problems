@@ -20,5 +20,3 @@ class Solution:
             return total_cost
         
         return min(dfs(0, 0), dfs(1, 0), dfs(2, 0))
-        
-        
