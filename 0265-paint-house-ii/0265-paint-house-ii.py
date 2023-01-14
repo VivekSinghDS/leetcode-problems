@@ -4,22 +4,28 @@ class Solution:
         k = len(costs[0])
         
         @cache
-        def dfs(color, num_house):
-            if num_house == n - 1:
-                return costs[num_house][color]
+        def dfs(color, i):
+            total = costs[i][color]
+            if i == len(costs) - 1:
+                return total 
             
             cost = float('inf')
-            for next_color in range(k):
-                if next_color == color:
+            for j in range(k):
+                if j == color:
                     continue 
-                cost = min(cost, dfs(next_color, num_house + 1))
+                    
+                cost = min(cost, dfs(j, i + 1))
                 
-            return cost + costs[num_house][color]
+            return total + cost
         
         res = float('inf')
-        for color in range(k):
-            res = min(res, dfs(color, 0))
+        for j in range(k):
+            res = min(res, dfs(j, 0))
             
         return res
+
+                
+            
+            
             
         
