@@ -1,32 +1,27 @@
 class Solution:
     def restoreIpAddresses(self, s: str) -> List[str]:
-        if not(4 <= len(s) <= 12):
-            return []
-        
         res = []
         
-        @cache
-        def backtrack(index, current_combination):
+        def backtrack(index, cur_comb):
             nonlocal res
-            current_combination = list(current_combination)
-            if len(current_combination) == 4:
-                if index == len(s):
-                    res.append(".".join(current_combination[:]))
-                    
+            if index == len(s):
+                
+                if len(cur_comb) == 4:
+                    # print(cur_comb)
+                    res.append(".".join(cur_comb))
+                
                 return 
             
             num = ""
-            for i in range(index, min(index + 3, len(s))):
+            for i in range(index, len(s)):
                 num += s[i]
                 
                 if num[0] == "0" and len(num) > 1:
-                    break 
+                    break
                     
                 if 0 <= int(num) <= 255:
-                    backtrack(i + 1, tuple(current_combination + [num]))
+                    backtrack(i + 1, cur_comb + [num])
                     
-        backtrack(0, tuple())
+        backtrack(0, [])
         return res
-                
-            
         
