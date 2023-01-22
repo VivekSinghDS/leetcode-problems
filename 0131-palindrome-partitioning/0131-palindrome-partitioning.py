@@ -1,29 +1,24 @@
 class Solution:
     def partition(self, s: str) -> List[List[str]]:
         
-        def helper(string, memo):
-            if len(string) == 0:
+        def dfs(s, memo):
+            if len(s) == 1:
+                return [[s]]
+            
+            elif len(s) == 0:
                 return [[]]
             
-            if len(string) == 1:
-                return [[string]]
+            if s in memo:
+                return memo[s]
             
-            if string in memo:
-                return memo[string]
-            
-            
-            
-            result = []
-            for i in range(1, len(string) + 1):
-                candidate = string[:i]
-                
+            res = []
+            for i in range(1, len(s) + 1):
+                candidate = s[:i]
                 if candidate == candidate[::-1]:
-                    for partition in helper(string[i:], memo):
-                        result.append([candidate] + partition)
+                    for partition in dfs(s[i:], memo):
+                        res.append([candidate] + partition)
                         
-            memo[string] = result
-            return result
-        
-        return helper(s, {})
-                
+            memo[s] = res
+            return res
+        return dfs(s, {})
         
