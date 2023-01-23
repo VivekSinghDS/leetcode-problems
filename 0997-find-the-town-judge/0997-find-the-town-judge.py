@@ -1,15 +1,15 @@
 class Solution:
     def findJudge(self, n: int, trust: List[List[int]]) -> int:
-        graph = defaultdict(list)
+        graph = defaultdict(set)
         
         for judgee, judges in trust:
-            graph[judgee].append(judges)
+            graph[judgee].add(judges)
             
         flag = False 
         judge = None
         # print(graph)
         for key in range(1, n + 1):
-            if graph[key] == []:
+            if not graph[key]:
                 judge = key
                 flag = True 
         # print(judge)       
