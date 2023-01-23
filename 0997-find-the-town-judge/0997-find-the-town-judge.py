@@ -7,12 +7,12 @@ class Solution:
             
         flag = False 
         judge = None
-        print(graph)
+        # print(graph)
         for key in range(1, n + 1):
             if graph[key] == []:
                 judge = key
                 flag = True 
-        print(judge)       
+        # print(judge)       
         if not flag:
             return -1 
         
