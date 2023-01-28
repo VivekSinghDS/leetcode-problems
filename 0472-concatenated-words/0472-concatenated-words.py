@@ -2,7 +2,7 @@ class Solution:
     def findAllConcatenatedWordsInADict(self, words: List[str]) -> List[str]:
         lookup = set(words)
         
-        
+        @lru_cache(maxsize = None)
         def dfs(word):
             for i in range(len(word)):
                 prefix = word[:i]
