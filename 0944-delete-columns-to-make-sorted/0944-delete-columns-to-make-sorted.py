@@ -17,6 +17,7 @@ class Solution:
             if "".join(sorted(cur_str)) != cur_str:
                 count += 1
                 
+                
         return count
                 
         
