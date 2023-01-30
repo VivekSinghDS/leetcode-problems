@@ -1,29 +1,16 @@
 class Solution:
     def findMinArrowShots(self, points: List[List[int]]) -> int:
-        points.sort()
+        if not points:
+            return 0
         
-        mapper = {}
-        pre = None 
-        for i, (x1, x2) in enumerate(points):
-            if pre:
-                pre_x1, pre_x2 = pre 
-                
-                if x1 - pre_x2 <= 0:
-                    mapper[(max(x1, pre_x1), min(x2, pre_x2))] = mapper[(pre_x1, pre_x2)]
-                    if (max(x1, pre_x1), min(x2, pre_x2)) != (pre_x1, pre_x2):
-                        mapper.pop((pre_x1, pre_x2))
-                    
-                    pre = (max(x1, pre_x1), min(x2, pre_x2))
-                    
-                else:
-                    mapper[(x1, x2)] = i
-                    pre = (x1, x2)
-                    
-            else:
-                mapper[(x1, x2)] = i
-                pre = (x1, x2)
+        points.sort(key = lambda x : x[1])
+        first_end = points[0][1]
+        arrows = 1
+        for x_start, x_end in points:
 
-        
-        # print(mapper)
-        return len((mapper.values()))
+            if first_end < x_start:
+                arrows += 1
+                first_end = x_end
+                
+        return arrows
         
