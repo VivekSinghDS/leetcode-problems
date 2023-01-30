@@ -1,23 +1,27 @@
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
+        pattern_s = {}
+        s_pattern = {}
         s = s.split(' ')
-        char_to_string = {}
-        string_to_char = {}
-        
         if len(s) != len(pattern):
             return False
-        for i, char in enumerate(pattern):
-            if char in char_to_string:
-                if char_to_string[char] != s[i]:
+        for i in range(len(pattern)):
+            # print(s_pattern, pattern_s)
+            # print(pattern[i], s[i])
+            if pattern[i] in pattern_s:
+                if pattern_s[pattern[i]] != s[i]:
                     return False 
-            
-            if s[i] in string_to_char:
-                if string_to_char[s[i]] != char:
+                
+            if s[i] in s_pattern:
+                if s_pattern[s[i]] != pattern[i]:
                     return False
                 
             else:
-                char_to_string[char] = s[i]
-                string_to_char[s[i]] = char
+                pattern_s[pattern[i]] = s[i]
+                s_pattern[s[i]] = pattern[i]
+                
+            # print('-'*10)
                 
         return True
+            
         
