@@ -1,34 +1,32 @@
 class Solution:
     def minimumRounds(self, tasks: List[int]) -> int:
-        counter = Counter(tasks)
-        
         @cache
-        def coinchange(n):
+        def is_good(n):
             if n == 1:
                 return float('inf')
             
             elif n == 2 or n == 3:
                 return 1
             
-            ans = float('inf')
-            if n >= 2:
-                ans = min(ans, 1 + coinchange(n - 2))
-                
+            number_of_ways = float('inf')
             if n >= 3:
-                ans = min(ans, 1 + coinchange(n - 3))
                 
+                number_of_ways = min(number_of_ways, 1 + is_good(n - 3))
                 
-            return ans
-        
-        res = 0
-        for values in counter.values():
-            ways = coinchange(values)
-            if ways == float('inf'):
+            if n >= 2:
+                number_of_ways = min(number_of_ways, 1 + is_good(n - 2))
+            return number_of_ways
+            
+        counter = Counter(tasks)
+        total = 0
+        for key in counter:
+            value = is_good(counter[key])
+            if value != float('inf'):
+                total += value
+                
+            else:
                 return -1
-            # print(ways)
-            res += ways 
             
-        return res
+        return total
                 
-            
-        
+                
