@@ -22,7 +22,7 @@ class Solution:
                     
                 l += 1
                     
-            res = max(res, sum(mapper.values()))
+            res = max(res, r - l + 1)
         return res
                     
             
