@@ -9,5 +9,5 @@ class Solution:
             for j in range(i + 1, min(i + no_of_steps + 1, len(nums))):
                 steps[j] = min(steps[j], 1 + steps[i])
         
-        print(steps)
+        # print(steps)
         return steps[-1]
