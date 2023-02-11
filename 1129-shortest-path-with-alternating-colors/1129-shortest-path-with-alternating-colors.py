@@ -9,7 +9,7 @@ class Solution:
             graph[src].add((tar, "blue"))
             
         # print(graph)
-        res = [float('inf')]*n
+        res = [-1]*n
         
         queue = deque()
         queue.append((0, 0, None))
@@ -17,7 +17,8 @@ class Solution:
         seen = set()
         while queue:
             node, distance, pre = queue.popleft()
-            res[node] = min(res[node], distance)
+            if res[node] == -1:
+                res[node] = distance
             if not pre:
                 for neighbor, color in graph[node]:
                     if (neighbor, color) not in seen:
@@ -31,7 +32,7 @@ class Solution:
                         queue.append((neighbor, 1 + distance, color))
         
         
-        return [-1 if r == float('inf') else r for r in res] 
+        return res
             
             
             
