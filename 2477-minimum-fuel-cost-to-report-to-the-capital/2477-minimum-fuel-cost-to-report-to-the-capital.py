@@ -15,8 +15,8 @@ class Solution:
         # print(degree)
         
         queue = deque()
-        for i in range(n):
-            if degree[i] == 1 and i != 0:
+        for i in range(1, n):
+            if degree[i] == 1:
                 queue.append(i)
                 
         representatives = [1]*n
