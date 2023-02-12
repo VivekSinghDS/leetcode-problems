@@ -25,7 +25,7 @@ class Solution:
         
         while queue:
             node = queue.popleft()
-            print(node)
+            # print(node)
             fuel += ceil(representatives[node] / seats)
             
             for neighbor in graph[node]:
