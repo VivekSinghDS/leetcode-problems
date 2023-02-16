@@ -7,6 +7,7 @@
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
         res = 0
+        @cache
         def dfs(node, level):
             nonlocal res
             if node:
