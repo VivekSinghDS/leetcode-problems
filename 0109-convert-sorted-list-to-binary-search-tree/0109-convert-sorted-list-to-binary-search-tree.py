@@ -11,32 +11,31 @@
 #         self.right = right
 class Solution:
     def sortedListToBST(self, head: Optional[ListNode]) -> Optional[TreeNode]:
-        def find_size(cur):
-            count = 0 
-            while cur:
-                cur = cur.next
-                count += 1
+        def get_size(root):
+            size = 0
+            while root:
+                root = root.next
+                size += 1
                 
-            return count 
+            return size 
+        
         
         def generate(left, right):
-            nonlocal head
+            nonlocal head 
+            
             if left > right:
-                return None 
+                return None
             
             mid = (left + right) // 2
-            left = generate(left, mid - 1)
-            
-            root = TreeNode(head.val)
-            
-            root.left = left
+            left_part = generate(left, mid - 1)
+            node = TreeNode(head.val)
             head = head.next
-            right = generate(mid + 1, right)
+            right_part = generate(mid + 1, right)
             
-            root.right = right
-            return root
-        
-        return generate(0, find_size(head) - 1)
+            node.left = left_part
+            node.right = right_part 
             
-
+            return node 
         
+        return generate(0, get_size(head) - 1)
+            
