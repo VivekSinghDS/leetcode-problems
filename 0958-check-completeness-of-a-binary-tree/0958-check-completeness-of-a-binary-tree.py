@@ -8,29 +8,22 @@ class Solution:
     def isCompleteTree(self, root: Optional[TreeNode]) -> bool:
         queue = deque()
         queue.append(root)
-        blank_somewhere = False 
+        previous_node = root 
         
         while queue:
             for _ in range(len(queue)):
                 node = queue.popleft()
-                if node.left and blank_somewhere:
-                    return False 
-                
-                elif node.left:
+                if node:
+                    if not previous_node:
+                        return False
+                    
                     queue.append(node.left)
-                    
-                else:
-                    blank_somewhere = True
-                    
-                if node.right and blank_somewhere:
-                    return False 
-                
-                elif node.right:
                     queue.append(node.right)
-                    
-                else:
-                    blank_somewhere = True
-                    
+                previous_node = node 
+                
         return True
                     
+            
+                    
+                
         
