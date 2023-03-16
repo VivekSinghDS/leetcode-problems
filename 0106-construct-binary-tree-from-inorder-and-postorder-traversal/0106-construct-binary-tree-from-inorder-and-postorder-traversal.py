@@ -7,13 +7,13 @@
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
         if not inorder or not postorder:
-            return None 
+            return None
+        
         
         val = postorder.pop()
+        index = inorder.index(val)
         root = TreeNode(val)
-        idx = inorder.index(val)
-        
-        root.right = self.buildTree(inorder[idx + 1:], postorder[idx:])
-        root.left = self.buildTree(inorder[:idx], postorder[:idx])
+        root.right = self.buildTree(inorder[index + 1:], postorder[index:])
+        root.left = self.buildTree(inorder[:index], postorder[:index])
         return root
         
