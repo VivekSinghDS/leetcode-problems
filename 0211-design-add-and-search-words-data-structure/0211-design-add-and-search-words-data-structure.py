@@ -1,27 +1,35 @@
 class WordDictionary:
 
     def __init__(self):
-        self.finder = defaultdict(set)
+        self.mapper = defaultdict(set)
         
 
     def addWord(self, word: str) -> None:
-        self.finder[len(word)].add(word)
+        self.mapper[len(word)].add(word)
         
 
     def search(self, word: str) -> bool:
         if "." not in word:
-            return word in self.finder[len(word)]
+            return word in self.mapper[len(word)]
         
         else:
-            for comparer in self.finder[len(word)]:
-                for i, char in enumerate(word):
-                    if char != "." and comparer[i] != char:
-                        break
-                    
+            flag = False
+            # print(word, self.mapper[len(word)])
+            for reference in self.mapper[len(word)]:
+                for i , char in enumerate(word):
+                    if char != "." and reference[i] != char:
+                        break 
+                        
                 else:
                     return True
                 
-            return False
+            if not flag:
+                return flag
+                    
+                    
+                    
+                    
+                        
                     
         
 
