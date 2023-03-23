@@ -9,7 +9,6 @@ class Solution:
             graph[target].append(source)
             
         res = []
-
         def dfs(node):
             nonlocal count
             if node not in seen:
@@ -27,9 +26,7 @@ class Solution:
                 count = 0
                 dfs(i)
                 if i > 0:
-                    ans += 1
-                
-                
+                    ans += 1        
         return ans
 
                 
