@@ -9,6 +9,8 @@ class Solution:
             graph[target].append(source)
             
         res = []
+        
+        @cache
         def dfs(node):
             nonlocal count
             if node not in seen:
