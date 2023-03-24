@@ -6,8 +6,6 @@ class Solution:
             graph[source].append((target, True))
             graph[target].append((source, False))
             
-            
-            
         # print(graph)
         count = 0
         
@@ -17,7 +15,7 @@ class Solution:
             for neighbor, part in graph[node]:
                 if neighbor not in seen:
                     
-                    if not(part == False):
+                    if (part == True):
                         # print(node, neighbor, part)
                         count += 1
                         
