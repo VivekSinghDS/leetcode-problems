@@ -1,7 +1,6 @@
 class Solution:
     def minReorder(self, n: int, connections: List[List[int]]) -> int:
         graph = defaultdict(list)
-        g2 = defaultdict(list)
         for source, target in connections:
             graph[source].append((target, True))
             graph[target].append((source, False))
