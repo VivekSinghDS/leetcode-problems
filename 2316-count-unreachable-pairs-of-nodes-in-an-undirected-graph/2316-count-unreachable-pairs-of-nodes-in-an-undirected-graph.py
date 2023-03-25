@@ -1,37 +1,46 @@
+class DSU:
+    def __init__(self, size):
+        self.root = [i for i in range(size)]
+        self.rank = [1]*size
+        
+    def find(self, x):
+        if x == self.root[x]:
+            return self.root[x]
+        
+        self.root[x] = self.find(self.root[x])
+        return self.root[x]
+    
+    def union(self, x, y):
+        rootX = self.find(x)
+        rootY = self.find(y)
+        
+        if rootX != rootY:
+            if self.rank[rootX] > self.rank[rootY]:
+                self.root[rootY] = rootX
+                
+            elif self.rank[rootY] > self.rank[rootX]:
+                self.root[rootX] = rootY
+                
+            else:
+                self.root[rootX] = rootY
+                self.rank[rootY] += 1
+            
 class Solution:
     def countPairs(self, n: int, edges: List[List[int]]) -> int:
-        graph = defaultdict(list)
-        for source, target in edges:
-            graph[source].append(target)
-            graph[target].append(source)
+        dsu = DSU(n)
+        for u, v in edges:
+            dsu.union(u, v)
             
-            
-        def dfs(node):
-            nonlocal count
-            if node not in seen:
-                seen.add(node)
-                count += 1
-                for neighbor in graph[node]:
-                    dfs(neighbor)
-                    
-        
-        
-        seen = set()
-        res = []
-        for i in range(n):
-            if i not in seen:
-                count = 0
-                dfs(i)
-                res.append(count)
-        if len(res) == 1:
-            return 0
-        
-        total = sum(res)
-        ans = 0
+        counter = Counter([dsu.find(i) for i in range(n)])
+        frequencies = list(counter.values())
         running_sum = 0
-        for n in res:
-            running_sum += n
-            ans += n*(total - running_sum)
+        total = sum(frequencies)
+        ans = 0
+        for val in frequencies:
+            running_sum += val
+            ans += (val * (total - running_sum))
             
-        return(ans)
+        return ans
+        print(frequencies)
+        
         
