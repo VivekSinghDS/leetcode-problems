@@ -25,19 +25,13 @@ class Solution:
             
             return None
             
-            
-                
-            
         def dfs(node):
             nonlocal res
             if not node:
                 return 0
             
             left = dfs(node.left)
-            right = dfs(node.right)
-            if node.val == x:
-                res = 1 + left + right
-                
+            right = dfs(node.right)                
             return 1 + left + right
         
         if x == root.val:
