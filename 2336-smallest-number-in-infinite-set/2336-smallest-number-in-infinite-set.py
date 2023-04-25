@@ -1,25 +1,31 @@
 class SmallestInfiniteSet:
 
     def __init__(self):
-        self.current = [i for i in range(1, 1001)]
-        self.remove_set = set()
-        heapify(self.current)
+        self.smallest_val = 1
+        self.lookup = set()
+        self.numbers = []
+        
 
     def popSmallest(self) -> int:
-        # print(self.current)
-        if self.current:  
-            value = heapq.heappop(self.current)
-            self.remove_set.add(value)
-            return value
-        
+        if self.numbers:
+            value = heapq.heappop(self.numbers)
+            if value in self.lookup:
+                self.lookup.remove(value)
+            return value 
         else:
-            return 0
+            value = self.smallest_val 
+            self.smallest_val += 1
+            return value
         
 
     def addBack(self, num: int) -> None:
-        if num in self.remove_set:
-            heapq.heappush(self.current, num)
-            self.remove_set.remove(num)
+        if self.smallest_val <= num or num in self.lookup:
+            return 
+        
+        self.lookup.add(num)
+        heapq.heappush(self.numbers, num)
+            
+        
 
 
 # Your SmallestInfiniteSet object will be instantiated and called as such:
