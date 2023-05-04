@@ -8,13 +8,11 @@ class Solution:
         
         while not(total < 0):
             for i in range(len(senate)):
-                # print(d_count, r_count)
                 if rights[i] == 0:
                     continue
                 if r_count == 0:
                     return "Dire"
                 elif d_count == 0:
-                    # print(rights)
                     return "Radiant"
 
                 if senate[i] == "R":
@@ -24,8 +22,7 @@ class Solution:
                         total -= 1
                     else:
                         flag_d += 1
-                        d_count -= 1
-                        
+                        d_count -= 1     
 
                 elif senate[i] == "D":
                     if flag_d > 0:
@@ -36,7 +33,6 @@ class Solution:
                         flag_r += 1
                         r_count -= 1
                         
-            # print('-'*10)
                         
         
 
