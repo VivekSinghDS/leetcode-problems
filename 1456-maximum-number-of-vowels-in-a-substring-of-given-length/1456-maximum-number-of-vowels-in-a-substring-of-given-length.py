@@ -3,9 +3,7 @@ class Solution:
         res = 0
         l = 0 
         vowel_count = 0 
-        current_string = ""
         for r in range(len(s)):
-            current_string += s[r]
             if s[r] in "aeiou":
                 vowel_count += 1
                 
