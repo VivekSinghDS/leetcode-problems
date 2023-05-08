@@ -1,26 +1,15 @@
 class Solution:
     def diagonalSum(self, mat: List[List[int]]) -> int:
-        def calculate(mat):
-            total = 0
-            for i in range(len(mat)):
-                for j in range(len(mat)):
-                    if ((i == j)):
-                        # print(i, j)
-                        total += mat[i][j]
-
-            return total
-        
-        ans = calculate(mat)
         n = len(mat)
-        mat = [x[::-1] for x in mat]
-        ans += calculate(mat)
+        ans = 0
+
+        for i in range(n):
+            # Add elements from primary diagonal.
+            ans += mat[i][i]
+            # Add elements from secondary diagonal.
+            ans += mat[n - 1 - i][i]
+        # If n is odd, subtract the middle element as its added twice.
+        if n % 2 != 0:
+             ans -= mat[n // 2][n // 2]
         
-        if len(mat) % 2 == 1:
-            ans -= mat[n // 2][n // 2]
-            
         return ans
-        
-        
-        
-            
-        
