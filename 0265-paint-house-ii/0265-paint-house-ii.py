@@ -1,31 +1,21 @@
 class Solution:
     def minCostII(self, costs: List[List[int]]) -> int:
-        n = len(costs)
-        k = len(costs[0])
+        
         
         @cache
-        def dfs(color, i):
-            total = costs[i][color]
-            if i == len(costs) - 1:
-                return total 
-            
+        def dfs(index, previous):
+            if index >= len(costs):
+                return 0
+    
             cost = float('inf')
-            for j in range(k):
-                if j == color:
+            for i in range(len(costs[index])):
+                if i == previous:
                     continue 
-                    
-                cost = min(cost, dfs(j, i + 1))
-                
-            return total + cost
+                cost = min(cost, costs[index][i] + dfs(index + 1, i))
+            return cost 
         
-        res = float('inf')
-        for j in range(k):
-            res = min(res, dfs(j, 0))
-            
-        return res
-
+        return dfs(0, None)
                 
-            
-            
-            
+                
+                
         
