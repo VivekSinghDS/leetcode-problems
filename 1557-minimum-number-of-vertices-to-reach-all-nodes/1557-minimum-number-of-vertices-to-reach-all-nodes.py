@@ -10,7 +10,8 @@ class Solution:
         for i in range(n):
             for nodes in graph[i]:
                 i_set.add(nodes)
-    
+        
+        @cache
         def dfs(node):
             if node in seen:
                 return 
