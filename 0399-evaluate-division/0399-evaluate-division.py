@@ -1,34 +1,34 @@
 class Solution:
     def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
-        
         graph = defaultdict(dict)
         
-        for i in range(len(equations)):
-            graph[equations[i][0]][equations[i][1]] = values[i]
-            graph[equations[i][1]][equations[i][0]] = 1 / values[i]
-        
-        def dfs(x, y, visited):
-            if (x not in graph or y not in graph):
+        for i, (numerator, denominator) in enumerate(equations):
+            graph[numerator][denominator] = values[i]
+            graph[denominator][numerator] = 1/values[i]
+            
+        # print(graph)
+        def dfs(numerator, denominator):
+            if numerator not in graph or denominator not in graph:
                 return -1
             
-            if y in graph[x]:
-                return graph[x][y]
+            elif denominator in graph[numerator]:
+                return graph[numerator][denominator]
             
-            for dependent in graph[x]:
-                if dependent not in visited:
-                    visited.add(dependent)
-                    temp = dfs(dependent, y, visited)
+            for potential_denominator in graph[numerator]:
+                if potential_denominator not in seen:
+                    seen.add(potential_denominator)
+                    temp = dfs(potential_denominator, denominator)
                     if temp == -1:
-                        continue 
-                        
+                        continue
                     else:
-                        return temp * graph[x][dependent]
-                    
+                        return temp * graph[numerator][potential_denominator]
             return -1
         
-        output = []
-        for a, b in queries:
-            output.append(dfs(a, b, set()))
-        return output
+        res = []
+        for numerator, denominator in queries:
+            seen = set()
+            res.append(dfs(numerator, denominator))
+        return res 
             
+        
         
