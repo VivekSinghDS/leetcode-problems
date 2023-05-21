@@ -12,6 +12,7 @@ class Solution:
                 return 
             
             
+            
             for j in range(index + 1, len(number) + 1):
                 new_sum = int(number[index : j])
                 dfs(j, current_sum + new_sum)
