@@ -20,8 +20,9 @@ class Solution:
         
         
         res = 0
+        seen = set()
         for i in range(len(grid)):
-            seen = set()
+            
             res = max(res, dfs(i, 0) - 1)
         return res
                 
