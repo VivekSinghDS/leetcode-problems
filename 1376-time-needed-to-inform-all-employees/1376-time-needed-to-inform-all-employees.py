@@ -4,7 +4,7 @@ class Solution:
         for i in range(len(manager)):
             graph[manager[i]].append(i)
         
-        @cache
+        
         def dfs(manager):
             time = informTime[manager]
             child_count = 0
