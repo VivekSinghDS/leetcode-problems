@@ -3,9 +3,8 @@ class Solution:
         graph = defaultdict(list)
         for i in range(len(manager)):
             graph[manager[i]].append(i)
-            
-        # print(graph)
         
+        @cache
         def dfs(manager):
             time = informTime[manager]
             child_count = 0
