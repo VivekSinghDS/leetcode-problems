@@ -1,23 +1,26 @@
 class Solution:
     def matrixSumQueries(self, n: int, queries: List[List[int]]) -> int:
-        rows = [0]*n  # row[i] : is ith row already filled ?
-        cols = [0]*n  # col[i] : is ith col already filled ?
-        fillRows = 0
-        fillCols = 0
-
+        row_filled_count = col_filled_count = 0
+        rows = [0]*n
+        cols = [0]*n
         res = 0
-        for i in range(len(queries)-1,-1,-1):
-            typ,idx,val = queries[i]
-            if typ == 0:
-                if rows[idx] == 1:  # idx row already filled
-                    continue
-                res += (n - fillCols)*val   # fillCols cells already filled in the row idx
-                rows[idx] = 1  # idx row is filled now
-                fillRows += 1  # increase the fill rows count as idx row is filled now
-            else:
-                if cols[idx] == 1:  # idx col already filled
-                    continue
-                res += (n - fillRows)*val   # fillRows cells already filled in the col idx
-                cols[idx] = 1  # idx col is filled now
-                fillCols += 1  # increase the fill cols count as idx col is filled now
+        for i in range(len(queries) - 1, -1, -1):
+            type_, index, value = queries[i]
+            if type_:# column case 
+                if cols[index]:
+                    continue   
+                res += (n - row_filled_count)*value
+                cols[index] = 1 
+                col_filled_count += 1 
+            else: # rows case 
+                if rows[index]:
+                    continue 
+                
+                res += (n - col_filled_count)*value
+                rows[index] = 1
+                row_filled_count += 1
         return res
+                
+                
+            
+        
