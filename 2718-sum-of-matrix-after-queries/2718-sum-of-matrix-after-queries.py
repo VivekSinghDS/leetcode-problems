@@ -1,6 +1,7 @@
 class Solution:
     def matrixSumQueries(self, n: int, queries: List[List[int]]) -> int:
-        row_filled_count = col_filled_count = 0
+        row_filled_count = 0
+        col_filled_count = 0
         rows = [0]*n
         cols = [0]*n
         res = 0
