@@ -1,10 +1,8 @@
 class Solution:
     def isMajorityElement(self, nums: List[int], target: int) -> bool:
-        counter = Counter(nums)
-        length = len(nums)
+        first = bisect_left(nums, target)
+        last = bisect_right(nums, target)
         
-        
-        if target in counter and counter[target] > length / 2:
-            return True 
-        return False
+        return True if last - first > len(nums) / 2 else False
+        # print(first, last)
             
