@@ -1,12 +1,8 @@
 class Solution:
     def nextGreatestLetter(self, letters: List[str], target: str) -> str:
         # letters.sort()
-        first = letters[0]
-        
-        for letter in letters:
-            if ord(target) < ord(letter):
-                return letter
-        return first
+        value = bisect_right(letters, target)
+        return letters[value] if value < len(letters) else letters[0]
             
             
         
