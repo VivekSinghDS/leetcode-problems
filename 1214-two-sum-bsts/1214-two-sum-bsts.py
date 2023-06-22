@@ -1,24 +1,35 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def twoSumBSTs(self, root1: Optional[TreeNode], root2: Optional[TreeNode], target: int) -> bool:
-        def insert_elements(root, set_name):
-            queue = deque()
-            queue.append(root)
-            while queue:
-                for _ in range(len(queue)):
-                    node = queue.popleft()
-                    if node:
-                        set_name.add(node.val)
-                        queue.append(node.left)
-                        queue.append(node.right)
-                        
-            return set_name
-        set_1 = set()
-        set_2 = set()
-        set_1 = insert_elements(root1, set_1)
-        set_2 = insert_elements(root2, set_2)
-        for element in set_1:
-            if (target - element) in set_2:
-                return True 
+        def search(node, value):
+            if not node:
+                return False 
             
-        return False
+            if value == node.val:
+                return True
+            
+            if value > node.val:
+                return search(node.right, value)
+                
+            else:
+                return search(node.left, value)
+            
+        stack = []
+        cur = root1
         
+        while stack or cur:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+
+            cur = stack.pop()
+            
+            if search(root2, target - cur.val):
+                return True
+            cur = cur.right
+        return False
