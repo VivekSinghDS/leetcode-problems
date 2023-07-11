@@ -9,18 +9,17 @@ class Solution:
     def distanceK(self, root: TreeNode, target: TreeNode, k: int) -> List[int]:
         def dfs(node, parent):
             if not node:
-                return None 
+                return 
             
             node.parent = parent
             dfs(node.left, node)
             dfs(node.right, node)
             
         dfs(root, None)
-        
         queue = deque()
         queue.append((target, 0))
-        seen = set()
         res = []
+        seen = set()
         while queue:
             if queue[0][1] == k:
                 return [node.val for node, distance in queue]
@@ -35,7 +34,7 @@ class Solution:
                             queue.append((neighbor, distance + 1))
                             
         return []
-                        
-                        
-                        
+        
+                    
+                
         
