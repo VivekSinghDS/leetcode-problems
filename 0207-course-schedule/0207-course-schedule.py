@@ -1,34 +1,26 @@
 class Solution:
     def canFinish(self, n: int, prerequisites: List[List[int]]) -> bool:
-        graph = defaultdict(list)
+        indegree = [0]*n
+        adj = [[] for _ in range(n)]
         
-        for current, pre in prerequisites:
-            graph[current].append(pre)
-        
-        @cache
-        def dfs(current):
-            if current in seen:
-                return False
+        for course, pre in prerequisites:
+            adj[pre].append(course)
+            indegree[course] += 1
             
-            elif graph[current] == []:
-                return True
-            
-            ans = True
-            seen.add(current)
-            for pre in graph[current]:
-                if not dfs(pre):
-                    return False
-                
-            seen.remove(current)
-            if ans:
-                graph[current] = []
-            
-            return ans
-        ans = True
-        seen = set()
+        # print(adj, indegree)
+        queue = deque()
         for i in range(n):
-            if not dfs(i):
-                return False
-        return ans
-                
+            if indegree[i] == 0:
+                queue.append(i)
+        seen = 0    
+        while queue:
+            node = queue.popleft()
+            seen += 1
+            
+            for neighbor in adj[node]:
+                indegree[neighbor] -= 1
+                if indegree[neighbor] == 0:
+                    queue.append(neighbor)
+        return seen == n
+            
         
