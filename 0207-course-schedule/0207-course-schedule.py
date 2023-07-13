@@ -1,34 +1,32 @@
 class Solution:
-    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+    def canFinish(self, n: int, prerequisites: List[List[int]]) -> bool:
         graph = defaultdict(list)
         
-        for cur, pre in prerequisites:
-            graph[cur].append(pre)
+        for current, pre in prerequisites:
+            graph[current].append(pre)
+        
+        @cache
+        def dfs(current):
+            if current in seen:
+                return False
             
-        # print(graph)
-            
-        def dfs(seen, course):
-            # print(seen, course)
-            if course in seen:
-                return False 
-            
-            elif graph[course] == []:
+            elif graph[current] == []:
                 return True
             
-            seen.add(course)
-            for pred in graph[course]:
-                if not dfs(seen, pred):
-                    return False 
-            
-            seen.remove(course)
-            graph[course] = []
-            return True
-        
-    
-        seen = set()
-        for i in range(numCourses):
-            if not dfs(seen, i):
-                return False 
-            
-        return True
+            ans = True
+            seen.add(current)
+            for pre in graph[current]:
+                ans &= dfs(pre)
                 
+            seen.remove(current)
+            if ans:
+                graph[current] = []
+            
+            return ans
+        ans = True
+        for i in range(n):
+            seen = set()
+            ans &= dfs(i)
+        return ans
+                
+        
