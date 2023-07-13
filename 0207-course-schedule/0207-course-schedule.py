@@ -25,8 +25,9 @@ class Solution:
             
             return ans
         ans = True
+        seen = set()
         for i in range(n):
-            seen = set()
+            
             ans &= dfs(i)
         return ans
                 
