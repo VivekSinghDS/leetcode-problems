@@ -27,8 +27,8 @@ class Solution:
         ans = True
         seen = set()
         for i in range(n):
-            
-            ans &= dfs(i)
+            if not dfs(i):
+                return False
         return ans
                 
         
