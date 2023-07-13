@@ -16,7 +16,8 @@ class Solution:
             ans = True
             seen.add(current)
             for pre in graph[current]:
-                ans &= dfs(pre)
+                if not dfs(pre):
+                    return False
                 
             seen.remove(current)
             if ans:
