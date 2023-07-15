@@ -2,7 +2,7 @@ class Solution:
     def maxValue(self, events: List[List[int]], k: int) -> int:
         events.sort(key = lambda x : x[0])
         
-        @cache
+        @lru_cache(None)
         def dfs(index, remaining, previous_meet_ended):
             if remaining == 0 or index >= len(events):
                 return 0
